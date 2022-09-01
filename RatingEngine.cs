@@ -27,11 +27,14 @@ namespace TestRating
                 TypeNameHandling = TypeNameHandling.Objects,
             };
             settings.Converters.Add(new PolicyConverter());
-            var item = JsonConvert.DeserializeObject<Policy>(policyJson, settings);
-            Console.WriteLine(item);
 
+            var policy = JsonConvert.DeserializeObject<Policy>(policyJson, settings);
+            Console.WriteLine(policy);
+            
+            /*
             var policy = JsonConvert.DeserializeObject<Policy>(policyJson,
                 new StringEnumConverter());
+            */
 
             switch (policy.Type)
             {
@@ -49,7 +52,10 @@ namespace TestRating
                         {
                             Rating = 1000m;
                         }
-                        Rating = 900m;
+                        else
+                        {
+                            Rating = 900m;
+                        }
                     }
                     else
                     {
@@ -57,10 +63,12 @@ namespace TestRating
                         {
                             Rating = 1100m;
                         }
-                        Rating = 1000m;
+                        else
+                        {
+                            Rating = 1000m;
+                        }
                     }
                     
-
                     break;
 
                 case PolicyType.Travel:
@@ -127,7 +135,7 @@ namespace TestRating
                     Console.WriteLine("Unknown policy type");
                     break;
             }
-
+            
             Console.WriteLine("Rating completed.");
         }
     }
