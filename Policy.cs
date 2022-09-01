@@ -44,8 +44,15 @@ namespace TestRating
         public string Country { get; set; }
         public int Days { get; set; }
 
+        public TravelPolicy ()
+	    {
+            Console.WriteLine("Rating TRAVEL policy...");
+	    }
+
         public override bool Validate()
         {
+            Console.WriteLine("Validating policy.");
+
             if (Days <= 0)
             {
                 Console.WriteLine("Travel policy must specify Days.");
@@ -77,11 +84,19 @@ namespace TestRating
 
     public class LifeInsurancePolicy : Policy
     {
+        public LifeInsurancePolicy ()
+	    {
+            Console.WriteLine("Rating Life policy...");
+
+	    }
+
         public bool IsSmoker { get; set; }
         public decimal Amount { get; set; }
 
         public override bool Validate()
         {
+            Console.WriteLine("Validating policy.");
+
             return base.Validate();
         }
 
@@ -93,17 +108,53 @@ namespace TestRating
 
     public class HealthPolicy : Policy
     {
+        public HealthPolicy ()
+	    {
+            Console.WriteLine("Rating HEALTH policy...");
+	    }
+
         public string Gender { get; set; }
         public decimal Deductible { get; set; }
 
         public override bool Validate()
         {
-            return base.Validate();
+             Console.WriteLine("Validating policy.");
+
+             if (String.IsNullOrEmpty(Gender))
+             {
+                Console.WriteLine("Health policy must specify Gender");
+                return false;
+             }
+             return true;
         }
 
         public override decimal Rate()
         {
-            return base.Rate();
+            var rating = 0m;
+            if (Gender == "Male")
+            {
+                if (Deductible < 500)
+                {
+                    rating = 1000m;
+                }
+                else
+                {
+                    rating = 900m;
+                }
+            }
+            else // Women
+            {
+                if (Deductible < 800)
+                {
+                    rating = 1100m;
+                }
+                else
+                {
+                    rating = 1000m;
+                }
+            }
+
+            return rating;
         }
     }
 }

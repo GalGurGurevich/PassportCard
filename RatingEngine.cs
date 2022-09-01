@@ -22,14 +22,10 @@ namespace TestRating
             // load policy - open file policy.json
             string policyJson = File.ReadAllText("policy.json");
 
-            JsonSerializerSettings settings = new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.Objects,
-            };
+            JsonSerializerSettings settings = new JsonSerializerSettings();
             settings.Converters.Add(new PolicyConverter());
 
             var policy = JsonConvert.DeserializeObject<Policy>(policyJson, settings);
-            Console.WriteLine(policy);
 
             var valid = policy.Validate();
             if(!valid) return;
