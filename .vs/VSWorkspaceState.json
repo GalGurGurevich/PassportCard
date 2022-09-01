@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\bin",
+    "\\bin\\Debug",
+    "\\bin\\Debug\\net5.0"
   ],
-  "SelectedNode": "\\policy.json",
+  "SelectedNode": "\\dotnet-console.csproj",
   "PreviewInSolutionExplorer": false
 }

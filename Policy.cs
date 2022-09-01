@@ -2,7 +2,6 @@
 
 namespace TestRating
 {
-
     public class Policy
     {
 
@@ -27,6 +26,21 @@ namespace TestRating
         public string Gender { get; set; }
         public decimal Deductible { get; set; }
         #endregion
+
+    }
+
+    public class TravelPolicy : Policy
+    {
+
+    }
+
+    public class LifeInsurancePolicy : Policy
+    {
+
+    }
+
+    public class HealthPolicy : Policy
+    {
 
     }
 }
