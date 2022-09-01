@@ -30,12 +30,17 @@ namespace TestRating
 
             var policy = JsonConvert.DeserializeObject<Policy>(policyJson, settings);
             Console.WriteLine(policy);
+
+            var valid = policy.Validate();
+            if(!valid) return;
+            Rating = policy.Rate();
             
             /*
             var policy = JsonConvert.DeserializeObject<Policy>(policyJson,
                 new StringEnumConverter());
             */
 
+            /*
             switch (policy.Type)
             {
                 case PolicyType.Health:
@@ -137,6 +142,8 @@ namespace TestRating
             }
             
             Console.WriteLine("Rating completed.");
+        }
+        */
         }
     }
 }
