@@ -96,13 +96,41 @@ namespace TestRating
         public override bool Validate()
         {
             Console.WriteLine("Validating policy.");
-
-            return base.Validate();
+            if (DateOfBirth == DateTime.MinValue)
+            {
+                Console.WriteLine("Life policy must include Date of Birth.");
+                return false;
+            }
+            if (DateOfBirth < DateTime.Today.AddYears(-100))
+            {
+                Console.WriteLine("Max eligible age for coverage is 100 years.");
+                return false;
+            }
+            if (Amount == 0)
+            {
+                Console.WriteLine("Life policy must include an Amount.");
+                return false;
+            }
+            return true;
         }
 
         public override decimal Rate()
         {
-            return base.Rate();
+            var rating = 0m;
+            int age = DateTime.Today.Year - DateOfBirth.Year;
+            if (DateOfBirth.Month == DateTime.Today.Month &&
+                        DateTime.Today.Day < DateOfBirth.Day ||
+                        DateTime.Today.Month < DateOfBirth.Month)
+            {
+                age--;
+            }
+            decimal baseRate = Amount * age / 200;
+            if (IsSmoker)
+            {
+                rating = baseRate * 2;
+            }
+            rating = baseRate;
+            return rating;
         }
     }
 
