@@ -2,7 +2,7 @@
 
 namespace TestRating
 {
-    public class Policy
+    public abstract class Policy
     {
 
         public PolicyType Type { get; set; }
@@ -12,15 +12,9 @@ namespace TestRating
         public DateTime DateOfBirth { get; set; }
         #endregion
         
-        public virtual bool Validate()
-        {
-            return true;
-        }
+        public abstract bool Validate();
 
-        public virtual decimal Rate()
-        {
-            return 0;
-        }
+        public abstract decimal Rate();
     }
 
     public class TravelPolicy : Policy
@@ -28,7 +22,7 @@ namespace TestRating
         public string Country { get; set; }
         public int Days { get; set; }
 
-        public TravelPolicy ()
+        public TravelPolicy()
 	    {
             Console.WriteLine("Rating TRAVEL policy...");
 	    }
@@ -68,7 +62,7 @@ namespace TestRating
 
     public class LifeInsurancePolicy : Policy
     {
-        public LifeInsurancePolicy ()
+        public LifeInsurancePolicy()
 	    {
             Console.WriteLine("Rating Life policy...");
 
@@ -120,7 +114,7 @@ namespace TestRating
 
     public class HealthPolicy : Policy
     {
-        public HealthPolicy ()
+        public HealthPolicy()
 	    {
             Console.WriteLine("Rating HEALTH policy...");
 	    }
